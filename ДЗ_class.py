@@ -22,7 +22,11 @@ class Student:
                f'Средняя оценка за домашние задания: {sum([sum(element) for element in self.grades.values()])/sum([len(element) for element in self.grades.values()])} \n' \
                f'Курсы в процессе изучения: {", ".join(self.courses_in_progress)} \n' \
                f'Завершенные курсы: {", ".join(self.finished_courses)}'
-
+ # добавим возможность сравнения
+    def __lt__(self, other):
+        avg_st1 = sum([sum(element) for element in self.grades.values()]) / sum([len(element) for element in self.grades.values()])
+        avg_st2 = sum([sum(element) for element in other.grades.values()]) / sum([len(element) for element in other.grades.values()])
+        return avg_st1 < avg_st2
 
 class Mentor:
     def __init__(self, name, surname):
@@ -40,7 +44,11 @@ class Lecturer(Mentor):
         return f'Имя: {self.name}\n' \
                f'Фамилия: {self.surname}\n' \
                f'Средняя оценка за лекции: {sum([sum(element) for element in self.grades.values()])/sum([len(element) for element in self.grades.values()])}'
-
+    # добавим возможность сравнения
+    def __lt__(self, other):
+        avg_mt1 = sum([sum(element) for element in self.grades.values()]) / sum([len(element) for element in self.grades.values()])
+        avg_mt2 = sum([sum(element) for element in other.grades.values()]) / sum([len(element) for element in other.grades.values()])
+        return avg_mt1 < avg_mt2
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -105,7 +113,7 @@ print()
 print()
 print(best_lecturer)
 print()
-print(best_student)
+# print(best_student)
 
 # сравнение оценок студентов
 best_student2 = Student('Leman', 'Russ', 'your_gender')
@@ -114,19 +122,9 @@ best_student2.courses_in_progress += ['Python']
 cool_mentor.rate_hw(best_student2, 'Python', 10)
 cool_mentor.rate_hw(best_student2, 'Python', 10)
 cool_mentor.rate_hw(best_student2, 'Python', 8)
-
-def stud(st1, st2):
-    avg_st1 = sum([sum(element) for element in st1.grades.values()])/sum([len(element) for element in st1.grades.values()])
-    avg_st2 = sum([sum(element) for element in st2.grades.values()]) / sum([len(element) for element in st2.grades.values()])
-
-    if avg_st1 == avg_st2:
-        print(f'Средняя оценка {st1.name}  равна {st2.name}')
-    if avg_st1 > avg_st2:
-        print(f'Средняя оценка {st1.name}  больше {st2.name}')
-    if avg_st1 < avg_st2:
-        print(f'Средняя оценка {st1.name}  меньше {st2.name}')
-
-stud(best_student, best_student2)
+# сравнение оценок по студентам
+print(best_student2)
+print(best_student > best_student2)
 
 best_lecturer2 = Lecturer('Lucas', 'Wolf')
 best_lecturer2.courses_attached += ['Python']
@@ -141,17 +139,6 @@ stup_student.rate_lec(best_lecturer2, 'Python',7)
 stup_student.rate_lec(best_lecturer2, 'Python', 9)
 
 # сравнение оценок по преподам
-def lect(mt1, mt2):
-    avg_mt1 = sum([sum(element) for element in mt1.grades.values()])/sum([len(element) for element in mt1.grades.values()])
-    avg_mt2 = sum([sum(element) for element in mt2.grades.values()]) / sum([len(element) for element in mt2.grades.values()])
-
-    if avg_mt1 == avg_mt2:
-        print(f'Средняя оценка {mt1.name}  равна {mt2.name}')
-    if avg_mt1 > avg_mt2:
-        print(f'Средняя оценка {mt1.name}  больше {mt2.name}')
-    if avg_mt1 < avg_mt2:
-        print(f'Средняя оценка {mt1.name}  меньше {mt2.name}')
+print(best_lecturer2)
+print(best_lecturer > best_lecturer2)
 print()
-lect(best_lecturer, best_lecturer2)
-
-
