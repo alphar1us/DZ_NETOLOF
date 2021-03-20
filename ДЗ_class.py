@@ -102,11 +102,6 @@ stup_student.rate_lec(best_lecturer, 'Python', 9)
 # задание 3
 print()
 
-
-# print(sum([sum(element) for element in best_student.grades.values()])/sum([len(element) for element in best_student.grades.values()]))
-
-
-
 # print(stup_student)
 
 
